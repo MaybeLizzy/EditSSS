@@ -187,7 +187,7 @@ def execute_ft(
                 loss = loss.mean()
                 
             if 'SSS' in hparams.alg_name.lower():                    
-                gradients = torch.autograd.grad(loss,hidden_states,retain_graph=True)
+                gradients = torch.autograd.grad(loss,hidden_states,retain_graph=True, create_graph=True)
                 fisher = gradients[0]
                 J = torch.cat([e.flatten() for e in fisher])
                 eigen = 0.0
