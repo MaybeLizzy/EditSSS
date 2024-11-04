@@ -85,7 +85,7 @@ class EditTrainer(BaseTrainer):
         if self.config.alg.startswith("MEND"):
             l_total_edit = self.config.cedit * l_edit + self.config.cloc * l_loc
             if 'SSS' in self.config.alg and training is True:
-                gradients = torch.autograd.grad(l_edit,hidden_states,retain_graph=True)
+                gradients = torch.autograd.grad(l_edit,hidden_states,retain_graph=True, create_graph=True)
                 fisher = gradients[0]
                 J = torch.cat([e.flatten() for e in fisher])
                 eigen = 0.0
